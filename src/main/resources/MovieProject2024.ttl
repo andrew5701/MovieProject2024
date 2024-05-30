@@ -1,0 +1,1234 @@
+@prefix : <http://www.semanticweb.org/andrewkrasuski/ontologies/MovieProject2024.owl/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix xml: <http://www.w3.org/XML/1998/namespace> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@base <http://www.semanticweb.org/andrewkrasuski/ontologies/MovieProject2024.owl/> .
+
+<http://www.semanticweb.org/andrewkrasuski/ontologies/MovieProject2024.owl> rdf:type owl:Ontology .
+
+#################################################################
+#    Datatypes
+#################################################################
+
+###  http://www.w3.org/2001/XMLSchema#date
+xsd:date rdf:type rdfs:Datatype .
+
+
+#################################################################
+#    Object Properties
+#################################################################
+
+###  http://www.semanticweb.org/andrewkrasuski/ontologies/MovieProject2024.owl/directed
+:directed rdf:type owl:ObjectProperty ;
+          owl:inverseOf :directedBy ;
+          rdf:type owl:AsymmetricProperty ,
+                   owl:IrreflexiveProperty ;
+          rdfs:domain :Director ;
+          rdfs:range :Movie .
+
+
+###  http://www.semanticweb.org/andrewkrasuski/ontologies/MovieProject2024.owl/directedBy
+:directedBy rdf:type owl:ObjectProperty ,
+                     owl:AsymmetricProperty ,
+                     owl:IrreflexiveProperty .
+
+
+###  http://www.semanticweb.org/andrewkrasuski/ontologies/MovieProject2024.owl/editedBy
+:editedBy rdf:type owl:ObjectProperty ;
+          rdfs:domain :Movie .
+
+
+###  http://www.semanticweb.org/andrewkrasuski/ontologies/MovieProject2024.owl/employs
+:employs rdf:type owl:ObjectProperty ,
+                  owl:TransitiveProperty ;
+         rdfs:domain :Production_Company ;
+         rdfs:range :Person .
+
+
+###  http://www.semanticweb.org/andrewkrasuski/ontologies/MovieProject2024.owl/hasActor
+:hasActor rdf:type owl:ObjectProperty ,
+                   owl:AsymmetricProperty ,
+                   owl:IrreflexiveProperty ;
+          rdfs:domain :Movie ;
+          rdfs:range :Actor .
+
+
+###  http://www.semanticweb.org/andrewkrasuski/ontologies/MovieProject2024.owl/hasActress
+:hasActress rdf:type owl:ObjectProperty ,
+                     owl:AsymmetricProperty ,
+                     owl:IrreflexiveProperty ;
+            rdfs:domain :Movie ;
+            rdfs:range :Actress .
+
+
+###  http://www.semanticweb.org/andrewkrasuski/ontologies/MovieProject2024.owl/hasAward
+:hasAward rdf:type owl:ObjectProperty ;
+          rdfs:domain [ rdf:type owl:Class ;
+                        owl:unionOf ( :Movie
+                                      :Person
+                                    )
+                      ] ;
+          rdfs:range :Award .
+
+
+###  http://www.semanticweb.org/andrewkrasuski/ontologies/MovieProject2024.owl/hasCertification
+:hasCertification rdf:type owl:ObjectProperty ;
+                  rdfs:domain :Movie ;
+                  rdfs:range :Certification .
+
+
+###  http://www.semanticweb.org/andrewkrasuski/ontologies/MovieProject2024.owl/hasGender
+:hasGender rdf:type owl:ObjectProperty ;
+           rdfs:domain :Person ;
+           rdfs:range :Gender .
+
+
+###  http://www.semanticweb.org/andrewkrasuski/ontologies/MovieProject2024.owl/hasGenre
+:hasGenre rdf:type owl:ObjectProperty ;
+          rdfs:domain :Movie ;
+          rdfs:range :Genre .
+
+
+###  http://www.semanticweb.org/andrewkrasuski/ontologies/MovieProject2024.owl/owns
+:owns rdf:type owl:ObjectProperty ;
+      rdfs:domain :Production_Company ;
+      rdfs:range :Movie .
+
+
+###  http://www.semanticweb.org/andrewkrasuski/ontologies/MovieProject2024.owl/playsIn
+:playsIn rdf:type owl:ObjectProperty ,
+                  owl:AsymmetricProperty ,
+                  owl:IrreflexiveProperty ;
+         rdfs:domain [ rdf:type owl:Class ;
+                       owl:unionOf ( :Actor
+                                     :Actress
+                                   )
+                     ] ;
+         rdfs:range :Movie .
+
+
+###  http://www.semanticweb.org/andrewkrasuski/ontologies/MovieProject2024.owl/producedBy
+:producedBy rdf:type owl:ObjectProperty ;
+            owl:inverseOf :produces ;
+            rdf:type owl:AsymmetricProperty ,
+                     owl:IrreflexiveProperty ;
+            rdfs:domain :Movie ;
+            rdfs:range [ rdf:type owl:Class ;
+                         owl:unionOf ( :Producer
+                                       :Production_Company
+                                     )
+                       ] .
+
+
+###  http://www.semanticweb.org/andrewkrasuski/ontologies/MovieProject2024.owl/produces
+:produces rdf:type owl:ObjectProperty ,
+                   owl:AsymmetricProperty ,
+                   owl:IrreflexiveProperty ;
+          rdfs:domain [ rdf:type owl:Class ;
+                        owl:unionOf ( :Producer
+                                      :Production_Company
+                                    )
+                      ] ;
+          rdfs:range :Movie .
+
+
+###  http://www.semanticweb.org/andrewkrasuski/ontologies/MovieProject2024.owl/writes
+:writes rdf:type owl:ObjectProperty ,
+                 owl:FunctionalProperty ,
+                 owl:IrreflexiveProperty ;
+        rdfs:domain :Writer ;
+        rdfs:range :Movie .
+
+
+#################################################################
+#    Data properties
+#################################################################
+
+###  http://www.semanticweb.org/andrewkrasuski/ontologies/MovieProject2024.owl/birthDate
+:birthDate rdf:type owl:DatatypeProperty ;
+           rdfs:domain :Person ;
+           rdfs:range xsd:date ;
+           rdfs:comment "Birthdate of a person." .
+
+
+###  http://www.semanticweb.org/andrewkrasuski/ontologies/MovieProject2024.owl/boxOfficeGross
+:boxOfficeGross rdf:type owl:DatatypeProperty ;
+                rdfs:domain :Movie ;
+                rdfs:range xsd:decimal ;
+                rdfs:comment "The total box office gross of a movie." .
+
+
+###  http://www.semanticweb.org/andrewkrasuski/ontologies/MovieProject2024.owl/budget
+:budget rdf:type owl:DatatypeProperty ;
+        rdfs:domain :Movie ;
+        rdfs:range xsd:decimal ;
+        rdfs:comment "The budget of the movie." .
+
+
+###  http://www.semanticweb.org/andrewkrasuski/ontologies/MovieProject2024.owl/duration
+:duration rdf:type owl:DatatypeProperty ;
+          rdfs:domain :Movie ;
+          rdfs:range xsd:integer ;
+          rdfs:comment "The runtime of the movie in minutes." .
+
+
+###  http://www.semanticweb.org/andrewkrasuski/ontologies/MovieProject2024.owl/firstName
+:firstName rdf:type owl:DatatypeProperty ;
+           rdfs:domain :Person ;
+           rdfs:range xsd:string .
+
+
+###  http://www.semanticweb.org/andrewkrasuski/ontologies/MovieProject2024.owl/lastName
+:lastName rdf:type owl:DatatypeProperty ;
+          rdfs:domain :Person ;
+          rdfs:range xsd:string .
+
+
+###  http://www.semanticweb.org/andrewkrasuski/ontologies/MovieProject2024.owl/movieTitle
+:movieTitle rdf:type owl:DatatypeProperty ;
+            rdfs:domain :Movie ;
+            rdfs:range xsd:string ;
+            rdfs:comment "The title of the movie." .
+
+
+###  http://www.semanticweb.org/andrewkrasuski/ontologies/MovieProject2024.owl/releaseDate
+:releaseDate rdf:type owl:DatatypeProperty ;
+             rdfs:domain :Movie ;
+             rdfs:range xsd:dateTime .
+
+
+#################################################################
+#    Classes
+#################################################################
+
+###  http://www.semanticweb.org/andrewkrasuski/ontologies/MovieProject2024.owl/Actor
+:Actor rdf:type owl:Class ;
+       owl:equivalentClass [ owl:intersectionOf ( :Person
+                                                  [ rdf:type owl:Restriction ;
+                                                    owl:onProperty :playsIn ;
+                                                    owl:someValuesFrom :Movie
+                                                  ]
+                                                  [ rdf:type owl:Restriction ;
+                                                    owl:onProperty :hasGender ;
+                                                    owl:hasValue :Male
+                                                  ]
+                                                ) ;
+                             rdf:type owl:Class
+                           ] ;
+       rdfs:subClassOf :Person ;
+       owl:disjointWith :Actress .
+
+
+###  http://www.semanticweb.org/andrewkrasuski/ontologies/MovieProject2024.owl/Actress
+:Actress rdf:type owl:Class ;
+         owl:equivalentClass [ owl:intersectionOf ( :Person
+                                                    [ rdf:type owl:Restriction ;
+                                                      owl:onProperty :playsIn ;
+                                                      owl:someValuesFrom :Movie
+                                                    ]
+                                                    [ rdf:type owl:Restriction ;
+                                                      owl:onProperty :hasGender ;
+                                                      owl:hasValue :Female
+                                                    ]
+                                                  ) ;
+                               rdf:type owl:Class
+                             ] ;
+         rdfs:subClassOf :Person .
+
+
+###  http://www.semanticweb.org/andrewkrasuski/ontologies/MovieProject2024.owl/Award
+:Award rdf:type owl:Class .
+
+
+###  http://www.semanticweb.org/andrewkrasuski/ontologies/MovieProject2024.owl/Certification
+:Certification rdf:type owl:Class .
+
+
+###  http://www.semanticweb.org/andrewkrasuski/ontologies/MovieProject2024.owl/Director
+:Director rdf:type owl:Class ;
+          owl:equivalentClass [ owl:intersectionOf ( :Person
+                                                     [ rdf:type owl:Restriction ;
+                                                       owl:onProperty :directed ;
+                                                       owl:someValuesFrom :Movie
+                                                     ]
+                                                   ) ;
+                                rdf:type owl:Class
+                              ] ;
+          rdfs:subClassOf :Person .
+
+
+###  http://www.semanticweb.org/andrewkrasuski/ontologies/MovieProject2024.owl/Gender
+:Gender rdf:type owl:Class .
+
+
+###  http://www.semanticweb.org/andrewkrasuski/ontologies/MovieProject2024.owl/Genre
+:Genre rdf:type owl:Class .
+
+
+###  http://www.semanticweb.org/andrewkrasuski/ontologies/MovieProject2024.owl/Movie
+:Movie rdf:type owl:Class ;
+       owl:equivalentClass [ owl:intersectionOf ( [ rdf:type owl:Restriction ;
+                                                    owl:onProperty :hasCertification ;
+                                                    owl:someValuesFrom :Certification
+                                                  ]
+                                                  [ rdf:type owl:Restriction ;
+                                                    owl:onProperty :hasGenre ;
+                                                    owl:someValuesFrom :Genre
+                                                  ]
+                                                  [ rdf:type owl:Restriction ;
+                                                    owl:onProperty :releaseDate ;
+                                                    owl:someValuesFrom xsd:dateTime
+                                                  ]
+                                                ) ;
+                             rdf:type owl:Class
+                           ] .
+
+
+###  http://www.semanticweb.org/andrewkrasuski/ontologies/MovieProject2024.owl/Person
+:Person rdf:type owl:Class .
+
+
+###  http://www.semanticweb.org/andrewkrasuski/ontologies/MovieProject2024.owl/Producer
+:Producer rdf:type owl:Class ;
+          owl:equivalentClass [ owl:intersectionOf ( :Person
+                                                     [ rdf:type owl:Restriction ;
+                                                       owl:onProperty :produces ;
+                                                       owl:someValuesFrom :Movie
+                                                     ]
+                                                   ) ;
+                                rdf:type owl:Class
+                              ] ;
+          rdfs:subClassOf :Person .
+
+
+###  http://www.semanticweb.org/andrewkrasuski/ontologies/MovieProject2024.owl/Production_Company
+:Production_Company rdf:type owl:Class ;
+                    owl:equivalentClass [ rdf:type owl:Restriction ;
+                                          owl:onProperty :owns ;
+                                          owl:minCardinality "1"^^xsd:nonNegativeInteger
+                                        ] .
+
+
+###  http://www.semanticweb.org/andrewkrasuski/ontologies/MovieProject2024.owl/Writer
+:Writer rdf:type owl:Class ;
+        owl:equivalentClass [ owl:intersectionOf ( :Person
+                                                   [ rdf:type owl:Restriction ;
+                                                     owl:onProperty :writes ;
+                                                     owl:someValuesFrom :Movie
+                                                   ]
+                                                 ) ;
+                              rdf:type owl:Class
+                            ] ;
+        rdfs:subClassOf :Person .
+
+
+#################################################################
+#    Individuals
+#################################################################
+
+###  http://www.semanticweb.org/andrewkrasuski/ontologies/MovieProject2024.owl#Andrew
+:Andrew rdf:type owl:NamedIndividual ,
+                 :Person .
+
+
+###  http://www.semanticweb.org/andrewkrasuski/ontologies/MovieProject2024.owl/AaronHorvath
+:AaronHorvath rdf:type owl:NamedIndividual ,
+                       :Director ;
+              :directed :SuperMarioBrosMovie ;
+              :firstName "Aaron" .
+
+
+###  http://www.semanticweb.org/andrewkrasuski/ontologies/MovieProject2024.owl/Action
+:Action rdf:type owl:NamedIndividual ,
+                 :Genre .
+
+
+###  http://www.semanticweb.org/andrewkrasuski/ontologies/MovieProject2024.owl/Adventure
+:Adventure rdf:type owl:NamedIndividual ,
+                    :Genre .
+
+
+###  http://www.semanticweb.org/andrewkrasuski/ontologies/MovieProject2024.owl/Andrew
+:Andrew rdf:type owl:NamedIndividual ;
+        :hasGender :Male ;
+        :playsIn :HomeAlone .
+
+
+###  http://www.semanticweb.org/andrewkrasuski/ontologies/MovieProject2024.owl/AndrewAdamson
+:AndrewAdamson rdf:type owl:NamedIndividual ,
+                        :Director ;
+               :directed :Shrek ;
+               :firstName "Andrew" ;
+               :lastName "Adamson" .
+
+
+###  http://www.semanticweb.org/andrewkrasuski/ontologies/MovieProject2024.owl/Animation
+:Animation rdf:type owl:NamedIndividual ,
+                    :Genre .
+
+
+###  http://www.semanticweb.org/andrewkrasuski/ontologies/MovieProject2024.owl/ArnoldSchwarzenegger
+:ArnoldSchwarzenegger rdf:type owl:NamedIndividual ,
+                               :Actor ;
+                      :hasGender :Male ;
+                      :playsIn :TheTerminator ;
+                      :birthDate "1947-07-30"^^xsd:date ;
+                      :firstName "Arnold" ;
+                      :lastName "Schwarzenegger" .
+
+
+###  http://www.semanticweb.org/andrewkrasuski/ontologies/MovieProject2024.owl/Best_Actor
+:Best_Actor rdf:type owl:NamedIndividual ,
+                     :Award .
+
+
+###  http://www.semanticweb.org/andrewkrasuski/ontologies/MovieProject2024.owl/Best_Actress
+:Best_Actress rdf:type owl:NamedIndividual ,
+                       :Award .
+
+
+###  http://www.semanticweb.org/andrewkrasuski/ontologies/MovieProject2024.owl/Best_Director
+:Best_Director rdf:type owl:NamedIndividual ,
+                        :Award .
+
+
+###  http://www.semanticweb.org/andrewkrasuski/ontologies/MovieProject2024.owl/Best_Picture
+:Best_Picture rdf:type owl:NamedIndividual ,
+                       :Award .
+
+
+###  http://www.semanticweb.org/andrewkrasuski/ontologies/MovieProject2024.owl/Best_Sound
+:Best_Sound rdf:type owl:NamedIndividual ,
+                     :Award .
+
+
+###  http://www.semanticweb.org/andrewkrasuski/ontologies/MovieProject2024.owl/Biographical
+:Biographical rdf:type owl:NamedIndividual ,
+                       :Genre .
+
+
+###  http://www.semanticweb.org/andrewkrasuski/ontologies/MovieProject2024.owl/CarrieAnneMoss
+:CarrieAnneMoss rdf:type owl:NamedIndividual ,
+                         :Actress ;
+                :hasGender :Female ;
+                :playsIn :Matrix ;
+                :birthDate "1967-08-21"^^xsd:date ;
+                :firstName "Carrie-Anne" ;
+                :lastName "Moss" .
+
+
+###  http://www.semanticweb.org/andrewkrasuski/ontologies/MovieProject2024.owl/CarrieFisher
+:CarrieFisher rdf:type owl:NamedIndividual ,
+                       :Actress ;
+              :hasGender :Female ;
+              :playsIn :EmpireStrikesBack ,
+                       :ReturnOfTheJedi ;
+              :birthDate "1956-10-21"^^xsd:date ;
+              :firstName "Carrie" ;
+              :lastName "Fisher" .
+
+
+###  http://www.semanticweb.org/andrewkrasuski/ontologies/MovieProject2024.owl/ChickenLittle
+:ChickenLittle rdf:type owl:NamedIndividual ,
+                        :Movie ;
+               :hasCertification :G_Certified ;
+               :hasGenre :Animation ,
+                         :Comedy ;
+               :producedBy :WaltDisneyPictures ;
+               :duration 81 ;
+               :movieTitle "Chicken Little" ;
+               :releaseDate "2005-11-04T00:00:00Z"^^xsd:dateTime .
+
+
+###  http://www.semanticweb.org/andrewkrasuski/ontologies/MovieProject2024.owl/ChrisColumbus
+:ChrisColumbus rdf:type owl:NamedIndividual ,
+                        :Director ;
+               :directed :HomeAlone ;
+               :firstName "Chris" ;
+               :lastName "Columbus" .
+
+
+###  http://www.semanticweb.org/andrewkrasuski/ontologies/MovieProject2024.owl/ChrisPratt
+:ChrisPratt rdf:type owl:NamedIndividual ,
+                     :Actor ;
+            :hasGender :Male ;
+            :playsIn :SuperMarioBrosMovie ;
+            :birthDate "1979-06-21"^^xsd:date ;
+            :firstName "Chris" ;
+            :lastName "Pratt" .
+
+
+###  http://www.semanticweb.org/andrewkrasuski/ontologies/MovieProject2024.owl/Comedy
+:Comedy rdf:type owl:NamedIndividual ,
+                 :Genre .
+
+
+###  http://www.semanticweb.org/andrewkrasuski/ontologies/MovieProject2024.owl/Crime
+:Crime rdf:type owl:NamedIndividual ,
+                :Genre .
+
+
+###  http://www.semanticweb.org/andrewkrasuski/ontologies/MovieProject2024.owl/DanielHansen
+:DanielHansen rdf:type owl:NamedIndividual ,
+                       :Actor ;
+              :hasGender :Male ;
+              :playsIn :MeetTheRobinsons ;
+              :birthDate "1992-08-25"^^xsd:date ;
+              :firstName "Daniel" ;
+              :lastName "Hansen" .
+
+
+###  http://www.semanticweb.org/andrewkrasuski/ontologies/MovieProject2024.owl/Disney
+:Disney rdf:type owl:NamedIndividual ,
+                 :Production_Company .
+
+
+###  http://www.semanticweb.org/andrewkrasuski/ontologies/MovieProject2024.owl/Documentary
+:Documentary rdf:type owl:NamedIndividual ,
+                      :Genre .
+
+
+###  http://www.semanticweb.org/andrewkrasuski/ontologies/MovieProject2024.owl/DonHahn
+:DonHahn rdf:type owl:NamedIndividual ,
+                  :Producer ;
+         :produces :TheLionKing ;
+         :firstName "Don" ;
+         :lastName "Hahn" .
+
+
+###  http://www.semanticweb.org/andrewkrasuski/ontologies/MovieProject2024.owl/Drama
+:Drama rdf:type owl:NamedIndividual ,
+                :Genre .
+
+
+###  http://www.semanticweb.org/andrewkrasuski/ontologies/MovieProject2024.owl/DreamWorks
+:DreamWorks rdf:type owl:NamedIndividual ,
+                     :Production_Company .
+
+
+###  http://www.semanticweb.org/andrewkrasuski/ontologies/MovieProject2024.owl/EddieMurphy
+:EddieMurphy rdf:type owl:NamedIndividual ,
+                      :Actor ;
+             :hasGender :Male ;
+             :playsIn :Shrek ;
+             :birthDate "1961-04-03"^^xsd:date ;
+             :firstName "Eddie" ;
+             :lastName "Murphy" .
+
+
+###  http://www.semanticweb.org/andrewkrasuski/ontologies/MovieProject2024.owl/EmpireStrikesBack
+:EmpireStrikesBack rdf:type owl:NamedIndividual ,
+                            :Movie ;
+                   :hasCertification :PG_Certified ;
+                   :hasGenre :Adventure ,
+                             :Science_Fiction ;
+                   :duration 124 ;
+                   :movieTitle "The Empire Strikes Back" ;
+                   :releaseDate "1980-05-21T00:00:00Z"^^xsd:dateTime .
+
+
+###  http://www.semanticweb.org/andrewkrasuski/ontologies/MovieProject2024.owl/Family
+:Family rdf:type owl:NamedIndividual .
+
+
+###  http://www.semanticweb.org/andrewkrasuski/ontologies/MovieProject2024.owl/Fantasy
+:Fantasy rdf:type owl:NamedIndividual ,
+                  :Genre .
+
+
+###  http://www.semanticweb.org/andrewkrasuski/ontologies/MovieProject2024.owl/Female
+:Female rdf:type owl:NamedIndividual ,
+                 :Gender .
+
+
+###  http://www.semanticweb.org/andrewkrasuski/ontologies/MovieProject2024.owl/FindingNemo
+:FindingNemo rdf:type owl:NamedIndividual ,
+                      :Movie ;
+             :hasCertification :G_Certified ;
+             :hasGenre :Adventure ,
+                       :Animation ;
+             :producedBy :Pixar ,
+                         :WaltDisneyPictures ;
+             :duration 100 ;
+             :movieTitle "Finding Nemo" ;
+             :releaseDate "2003-05-30T00:00:00Z"^^xsd:dateTime .
+
+
+###  http://www.semanticweb.org/andrewkrasuski/ontologies/MovieProject2024.owl/FreddiePrinzeJr
+:FreddiePrinzeJr rdf:type owl:NamedIndividual ,
+                          :Actor ;
+                 :hasGender :Male ;
+                 :playsIn :ScoobyDoo ;
+                 :birthDate "1976-03-08"^^xsd:date ;
+                 :firstName "Freddie" ;
+                 :lastName "Prinze Jr." .
+
+
+###  http://www.semanticweb.org/andrewkrasuski/ontologies/MovieProject2024.owl/G_Certified
+:G_Certified rdf:type owl:NamedIndividual ,
+                      :Certification .
+
+
+###  http://www.semanticweb.org/andrewkrasuski/ontologies/MovieProject2024.owl/GeorgeLucas
+:GeorgeLucas rdf:type owl:NamedIndividual ,
+                      :Writer ;
+             :writes :ReturnOfTheJedi ;
+             :firstName "George" ;
+             :lastName "Lucas" .
+
+
+###  http://www.semanticweb.org/andrewkrasuski/ontologies/MovieProject2024.owl/HarrisonFord
+:HarrisonFord rdf:type owl:NamedIndividual ,
+                       :Actor ;
+              :hasGender :Male ;
+              :playsIn :EmpireStrikesBack ,
+                       :IndianaJones ,
+                       :ReturnOfTheJedi ;
+              :birthDate "1942-07-13"^^xsd:date ;
+              :firstName "Harrison" ;
+              :lastName "Ford" .
+
+
+###  http://www.semanticweb.org/andrewkrasuski/ontologies/MovieProject2024.owl/HayaoMiyazaki
+:HayaoMiyazaki rdf:type owl:NamedIndividual ,
+                        :Director ;
+               :directed :MyNeighborTotoro ,
+                         :SpiritedAway ;
+               :firstName "Hayao" ;
+               :lastName "Miyazaki" .
+
+
+###  http://www.semanticweb.org/andrewkrasuski/ontologies/MovieProject2024.owl/Historical
+:Historical rdf:type owl:NamedIndividual ,
+                     :Genre .
+
+
+###  http://www.semanticweb.org/andrewkrasuski/ontologies/MovieProject2024.owl/HomeAlone
+:HomeAlone rdf:type owl:NamedIndividual ,
+                    :Movie ;
+           :hasCertification :PG_Certified ;
+           :hasGenre :Comedy ,
+                     :Family ;
+           :producedBy <http://www.semanticweb.org/andrewkrasuski/ontologies/MovieProject2024.owl/20thCenturyFox> ;
+           :duration 103 ;
+           :movieTitle "Home Alone" ;
+           :releaseDate "1990-11-16T00:00:00Z"^^xsd:dateTime .
+
+
+###  http://www.semanticweb.org/andrewkrasuski/ontologies/MovieProject2024.owl/Horror
+:Horror rdf:type owl:NamedIndividual ,
+                 :Genre .
+
+
+###  http://www.semanticweb.org/andrewkrasuski/ontologies/MovieProject2024.owl/IndianaJones
+:IndianaJones rdf:type owl:NamedIndividual ,
+                       :Movie ;
+              :hasCertification :M ;
+              :hasGenre :Action ,
+                        :Adventure ;
+              :producedBy :Lucasfilm ;
+              :duration 115 ;
+              :movieTitle "Indiana Jones: Raiders of the Lost Ark" ;
+              :releaseDate "1981-06-12T00:00:00Z"^^xsd:dateTime .
+
+
+###  http://www.semanticweb.org/andrewkrasuski/ontologies/MovieProject2024.owl/IronMan
+:IronMan rdf:type owl:NamedIndividual ,
+                  :Movie ;
+         :hasCertification :PG_Certified ;
+         :hasGenre :Action ,
+                   :Science_Fiction ;
+         :producedBy :Marvel ;
+         :duration 126 ;
+         :movieTitle "Iron Man" ;
+         :releaseDate "2008-05-02T00:00:00Z"^^xsd:dateTime .
+
+
+###  http://www.semanticweb.org/andrewkrasuski/ontologies/MovieProject2024.owl/IrvinKershner
+:IrvinKershner rdf:type owl:NamedIndividual ,
+                        :Director ;
+               :directed :EmpireStrikesBack ;
+               :firstName "Irvin" ;
+               :lastName "Kershner" .
+
+
+###  http://www.semanticweb.org/andrewkrasuski/ontologies/MovieProject2024.owl/JackBlack
+:JackBlack rdf:type owl:NamedIndividual ,
+                    :Actor ;
+           :hasGender :Male ;
+           :playsIn :SuperMarioBrosMovie ;
+           :birthDate "1969-08-28"^^xsd:date ;
+           :firstName "Jack" ;
+           :lastName "Black" .
+
+
+###  http://www.semanticweb.org/andrewkrasuski/ontologies/MovieProject2024.owl/JamesCameron
+:JamesCameron rdf:type owl:NamedIndividual ,
+                       :Director ;
+              :directed :TheTerminator ;
+              :firstName "James" ;
+              :lastName "Cameron" .
+
+
+###  http://www.semanticweb.org/andrewkrasuski/ontologies/MovieProject2024.owl/JoanCusack
+:JoanCusack rdf:type owl:NamedIndividual ,
+                     :Actress ;
+            :hasGender :Female ;
+            :playsIn :ChickenLittle ;
+            :birthDate "1962-10-11"^^xsd:date ;
+            :firstName "Joan" ;
+            :lastName "Cusack" .
+
+
+###  http://www.semanticweb.org/andrewkrasuski/ontologies/MovieProject2024.owl/JohnAvildsen
+:JohnAvildsen rdf:type owl:NamedIndividual ,
+                       :Director ;
+              :directed :Rocky ;
+              :firstName "John" ;
+              :lastName "Avildsen" .
+
+
+###  http://www.semanticweb.org/andrewkrasuski/ontologies/MovieProject2024.owl/JohnHughes
+:JohnHughes rdf:type owl:NamedIndividual ,
+                     :Producer ;
+            :produces :HomeAlone ;
+            :firstName "John" ;
+            :lastName "Hughes" .
+
+
+###  http://www.semanticweb.org/andrewkrasuski/ontologies/MovieProject2024.owl/JohnLasseter
+:JohnLasseter rdf:type owl:NamedIndividual ,
+                       :Director ;
+              :directed :ToyStory ;
+              :birthDate "1957-01-12"^^xsd:date ;
+              :firstName "John" ;
+              :lastName "Lasseter" .
+
+
+###  http://www.semanticweb.org/andrewkrasuski/ontologies/MovieProject2024.owl/JonFavreau
+:JonFavreau rdf:type owl:NamedIndividual ,
+                     :Actor ,
+                     :Director ;
+            :directed :IronMan ;
+            :hasGender :Male ;
+            :playsIn :IronMan ;
+            :birthDate "1966-10-19"^^xsd:date ;
+            :firstName "Jon" ;
+            :lastName "Favreau" .
+
+
+###  http://www.semanticweb.org/andrewkrasuski/ontologies/MovieProject2024.owl/JordanFry
+:JordanFry rdf:type owl:NamedIndividual ,
+                    :Actor ;
+           :hasGender :Male ;
+           :playsIn :MeetTheRobinsons ;
+           :birthDate "1991-06-07"^^xsd:date ;
+           :firstName "Jordan" ;
+           :lastName "Fry" .
+
+
+###  http://www.semanticweb.org/andrewkrasuski/ontologies/MovieProject2024.owl/KeanuReeves
+:KeanuReeves rdf:type owl:NamedIndividual ,
+                      :Actor ;
+             :hasAward :Best_Actor ;
+             :hasGender :Male ;
+             :playsIn :Matrix ;
+             :birthDate "1964-09-02"^^xsd:date ;
+             :firstName "Keanu" ;
+             :lastName "Reeves" .
+
+
+###  http://www.semanticweb.org/andrewkrasuski/ontologies/MovieProject2024.owl/KunihikoYuyama
+:KunihikoYuyama rdf:type owl:NamedIndividual ,
+                         :Director ;
+                :directed :PokemonTheFirstMovie ;
+                :firstName "Kunihiko" ;
+                :lastName "Yuyama" .
+
+
+###  http://www.semanticweb.org/andrewkrasuski/ontologies/MovieProject2024.owl/LanaWachowski
+:LanaWachowski rdf:type owl:NamedIndividual ,
+                        :Director ;
+               :directed :Matrix ;
+               :firstName "Lana" ;
+               :lastName "Wachowski" .
+
+
+###  http://www.semanticweb.org/andrewkrasuski/ontologies/MovieProject2024.owl/Lucasfilm
+:Lucasfilm rdf:type owl:NamedIndividual ,
+                    :Production_Company ;
+           :employs :IrvinKershner ,
+                    :MarkHamillESB ;
+           :owns :EmpireStrikesBack ;
+           :produces :EmpireStrikesBack .
+
+
+###  http://www.semanticweb.org/andrewkrasuski/ontologies/MovieProject2024.owl/M
+:M rdf:type owl:NamedIndividual ,
+            :Certification .
+
+
+###  http://www.semanticweb.org/andrewkrasuski/ontologies/MovieProject2024.owl/MacaulayCulkin
+:MacaulayCulkin rdf:type owl:NamedIndividual ,
+                         :Actor ;
+                :hasGender :Male ;
+                :playsIn :HomeAlone ;
+                :birthDate "1980-08-26"^^xsd:date ;
+                :firstName "Macaulay" ;
+                :lastName "Culkin" .
+
+
+###  http://www.semanticweb.org/andrewkrasuski/ontologies/MovieProject2024.owl/Male
+:Male rdf:type owl:NamedIndividual ,
+               :Gender .
+
+
+###  http://www.semanticweb.org/andrewkrasuski/ontologies/MovieProject2024.owl/MarkDindal
+:MarkDindal rdf:type owl:NamedIndividual ,
+                     :Director ;
+            :directed :ChickenLittle ;
+            :firstName "Mark" ;
+            :lastName "Dindal" .
+
+
+###  http://www.semanticweb.org/andrewkrasuski/ontologies/MovieProject2024.owl/MarkHamill
+:MarkHamill rdf:type owl:NamedIndividual ,
+                     :Actor ;
+            :hasAward :Best_Actor ;
+            :hasGender :Male ;
+            :playsIn :ReturnOfTheJedi ;
+            :birthDate "1951-09-25"^^xsd:date ;
+            :firstName "Mark" ;
+            :lastName "Hamill" .
+
+
+###  http://www.semanticweb.org/andrewkrasuski/ontologies/MovieProject2024.owl/MarkHamillESB
+:MarkHamillESB rdf:type owl:NamedIndividual ;
+               :hasGender :Male ;
+               :playsIn :EmpireStrikesBack ;
+               :birthDate "1951-09-25"^^xsd:date ;
+               :firstName "Mark" ;
+               :lastName "Hamill" .
+
+
+###  http://www.semanticweb.org/andrewkrasuski/ontologies/MovieProject2024.owl/Marvel
+:Marvel rdf:type owl:NamedIndividual ,
+                 :Production_Company .
+
+
+###  http://www.semanticweb.org/andrewkrasuski/ontologies/MovieProject2024.owl/Matrix
+:Matrix rdf:type owl:NamedIndividual ,
+                 :Movie ;
+        :hasAward :Best_Picture ;
+        :hasCertification :M ;
+        :hasGenre :Action ,
+                  :Science_Fiction ;
+        :producedBy :WarnerBros ;
+        :duration 136 ;
+        :movieTitle "The Matrix" ;
+        :releaseDate "1999-03-31T00:00:00Z"^^xsd:dateTime .
+
+
+###  http://www.semanticweb.org/andrewkrasuski/ontologies/MovieProject2024.owl/MatthewFogel
+:MatthewFogel rdf:type owl:NamedIndividual ,
+                       :Writer ;
+              :writes :SuperMarioBrosMovie ;
+              :firstName "Matthew" .
+
+
+###  http://www.semanticweb.org/andrewkrasuski/ontologies/MovieProject2024.owl/MeetTheRobinsons
+:MeetTheRobinsons rdf:type owl:NamedIndividual ,
+                           :Movie ;
+                  :hasCertification :G_Certified ;
+                  :hasGenre :Animation ,
+                            :Family ;
+                  :producedBy :WaltDisneyPictures ;
+                  :duration 95 ;
+                  :movieTitle "Meet the Robinsons" ;
+                  :releaseDate "2007-03-30T00:00:00Z"^^xsd:dateTime .
+
+
+###  http://www.semanticweb.org/andrewkrasuski/ontologies/MovieProject2024.owl/MichaelJelenic
+:MichaelJelenic rdf:type owl:NamedIndividual ,
+                         :Director ;
+                :directed :SuperMarioBrosMovie ;
+                :firstName "Michael" .
+
+
+###  http://www.semanticweb.org/andrewkrasuski/ontologies/MovieProject2024.owl/MikeMyers
+:MikeMyers rdf:type owl:NamedIndividual ,
+                    :Actor ;
+           :hasGender :Male ;
+           :playsIn :Shrek ;
+           :birthDate "1963-05-25"^^xsd:date ;
+           :firstName "Mike" ;
+           :lastName "Myers" .
+
+
+###  http://www.semanticweb.org/andrewkrasuski/ontologies/MovieProject2024.owl/Musical
+:Musical rdf:type owl:NamedIndividual ,
+                  :Genre .
+
+
+###  http://www.semanticweb.org/andrewkrasuski/ontologies/MovieProject2024.owl/MyNeighborTotoro
+:MyNeighborTotoro rdf:type owl:NamedIndividual ,
+                           :Movie ;
+                  :hasCertification :G_Certified ;
+                  :hasGenre :Animation ,
+                            :Family ;
+                  :duration 86 ;
+                  :movieTitle "My Neighbor Totoro" ;
+                  :releaseDate "1988-04-16T00:00:00Z"^^xsd:dateTime .
+
+
+###  http://www.semanticweb.org/andrewkrasuski/ontologies/MovieProject2024.owl/Mystery
+:Mystery rdf:type owl:NamedIndividual ,
+                  :Genre .
+
+
+###  http://www.semanticweb.org/andrewkrasuski/ontologies/MovieProject2024.owl/Nintendo
+:Nintendo rdf:type owl:NamedIndividual ,
+                   :Production_Company .
+
+
+###  http://www.semanticweb.org/andrewkrasuski/ontologies/MovieProject2024.owl/OrientalLightAndMagic
+:OrientalLightAndMagic rdf:type owl:NamedIndividual ,
+                                :Production_Company ;
+                       :employs :KunihikoYuyama ,
+                                :VeronicaTaylor ;
+                       :owns :PokemonTheFirstMovie ;
+                       :produces :PokemonTheFirstMovie .
+
+
+###  http://www.semanticweb.org/andrewkrasuski/ontologies/MovieProject2024.owl/OrionPictures
+:OrionPictures rdf:type owl:NamedIndividual ,
+                        :Production_Company ;
+               :owns :TheTerminator ;
+               :produces :TheTerminator .
+
+
+###  http://www.semanticweb.org/andrewkrasuski/ontologies/MovieProject2024.owl/PG_Certified
+:PG_Certified rdf:type owl:NamedIndividual ,
+                       :Certification .
+
+
+###  http://www.semanticweb.org/andrewkrasuski/ontologies/MovieProject2024.owl/Pixar
+:Pixar rdf:type owl:NamedIndividual ,
+                :Production_Company ;
+       :owns :ToyStory .
+
+
+###  http://www.semanticweb.org/andrewkrasuski/ontologies/MovieProject2024.owl/PokemonTheFirstMovie
+:PokemonTheFirstMovie rdf:type owl:NamedIndividual ,
+                               :Movie ;
+                      :hasCertification :PG_Certified ;
+                      :hasGenre :Adventure ,
+                                :Animation ;
+                      :producedBy :Nintendo ;
+                      :duration 75 ;
+                      :movieTitle "Pokémon: The First Movie" ;
+                      :releaseDate "1998-07-18T00:00:00Z"^^xsd:dateTime .
+
+
+###  http://www.semanticweb.org/andrewkrasuski/ontologies/MovieProject2024.owl/RajaGosnell
+:RajaGosnell rdf:type owl:NamedIndividual ,
+                      :Director ;
+             :directed :ScoobyDoo ;
+             :firstName "Raja" ;
+             :lastName "Gosnell" .
+
+
+###  http://www.semanticweb.org/andrewkrasuski/ontologies/MovieProject2024.owl/ReturnOfTheJedi
+:ReturnOfTheJedi rdf:type owl:NamedIndividual ,
+                          :Movie ;
+                 :hasCertification :PG_Certified ;
+                 :hasGenre :Adventure ,
+                           :Science_Fiction ;
+                 :producedBy :Lucasfilm ;
+                 :duration 131 ;
+                 :movieTitle "Star Wars: Return of the Jedi" ;
+                 :releaseDate "1983-05-25T00:00:00Z"^^xsd:dateTime .
+
+
+###  http://www.semanticweb.org/andrewkrasuski/ontologies/MovieProject2024.owl/RobMinkoff
+:RobMinkoff rdf:type owl:NamedIndividual ,
+                     :Director ;
+            :directed :TheLionKing ;
+            :firstName "Rob" ;
+            :lastName "Minkoff" .
+
+
+###  http://www.semanticweb.org/andrewkrasuski/ontologies/MovieProject2024.owl/RobertDowneyJr
+:RobertDowneyJr rdf:type owl:NamedIndividual ,
+                         :Actor ;
+                :hasGender :Male ;
+                :playsIn :IronMan ;
+                :birthDate "1965-04-04"^^xsd:date ;
+                :firstName "Robert" ;
+                :lastName "Downey Jr." .
+
+
+###  http://www.semanticweb.org/andrewkrasuski/ontologies/MovieProject2024.owl/Rocky
+:Rocky rdf:type owl:NamedIndividual ,
+                :Movie ;
+       :hasAward :Best_Picture ;
+       :hasCertification :PG_Certified ;
+       :hasGenre :Drama ,
+                 :Sport ;
+       :producedBy :UnitedArtists ;
+       :duration 119 ;
+       :movieTitle "Rocky" ;
+       :releaseDate "1976-11-21T00:00:00Z"^^xsd:dateTime .
+
+
+###  http://www.semanticweb.org/andrewkrasuski/ontologies/MovieProject2024.owl/RogerAllers
+:RogerAllers rdf:type owl:NamedIndividual ,
+                      :Director ;
+             :directed :TheLionKing ;
+             :firstName "Roger" ;
+             :lastName "Allers" .
+
+
+###  http://www.semanticweb.org/andrewkrasuski/ontologies/MovieProject2024.owl/Romance
+:Romance rdf:type owl:NamedIndividual ,
+                  :Genre .
+
+
+###  http://www.semanticweb.org/andrewkrasuski/ontologies/MovieProject2024.owl/SarahMichelleGellar
+:SarahMichelleGellar rdf:type owl:NamedIndividual ,
+                              :Actress ;
+                     :hasGender :Female ;
+                     :playsIn :ScoobyDoo ;
+                     :birthDate "1977-04-14"^^xsd:date ;
+                     :firstName "Sarah Michelle" ;
+                     :lastName "Gellar" .
+
+
+###  http://www.semanticweb.org/andrewkrasuski/ontologies/MovieProject2024.owl/Science_Fiction
+:Science_Fiction rdf:type owl:NamedIndividual ,
+                          :Genre .
+
+
+###  http://www.semanticweb.org/andrewkrasuski/ontologies/MovieProject2024.owl/ScoobyDoo
+:ScoobyDoo rdf:type owl:NamedIndividual ,
+                    :Movie ;
+           :hasCertification :PG_Certified ;
+           :hasGenre :Adventure ,
+                     :Comedy ,
+                     :Mystery ;
+           :producedBy :WarnerBros ;
+           :duration 86 ;
+           :movieTitle "Scooby-Doo" ;
+           :releaseDate "2002-06-14T00:00:00Z"^^xsd:dateTime .
+
+
+###  http://www.semanticweb.org/andrewkrasuski/ontologies/MovieProject2024.owl/Shrek
+:Shrek rdf:type owl:NamedIndividual ,
+                :Movie ;
+       :hasAward :Best_Sound ;
+       :hasCertification :PG_Certified ;
+       :hasGenre :Adventure ,
+                 :Animation ,
+                 :Comedy ;
+       :producedBy :DreamWorks ;
+       :duration 90 ;
+       :movieTitle "Shrek" ;
+       :releaseDate "2001-04-22T00:00:00Z"^^xsd:dateTime .
+
+
+###  http://www.semanticweb.org/andrewkrasuski/ontologies/MovieProject2024.owl/SpiritedAway
+:SpiritedAway rdf:type owl:NamedIndividual ,
+                       :Movie ;
+              :hasCertification :PG_Certified ;
+              :hasGenre :Animation ,
+                        :Fantasy ;
+              :producedBy :StudioGhibli ;
+              :duration 125 ;
+              :movieTitle "Spirited Away" ;
+              :releaseDate "2001-07-20T00:00:00Z"^^xsd:dateTime .
+
+
+###  http://www.semanticweb.org/andrewkrasuski/ontologies/MovieProject2024.owl/Sport
+:Sport rdf:type owl:NamedIndividual .
+
+
+###  http://www.semanticweb.org/andrewkrasuski/ontologies/MovieProject2024.owl/StephenAnderson
+:StephenAnderson rdf:type owl:NamedIndividual ,
+                          :Director ;
+                 :directed :MeetTheRobinsons ;
+                 :firstName "Stephen" ;
+                 :lastName "Anderson" .
+
+
+###  http://www.semanticweb.org/andrewkrasuski/ontologies/MovieProject2024.owl/StevenSpielberg
+:StevenSpielberg rdf:type owl:NamedIndividual ,
+                          :Director ;
+                 :directed :IndianaJones ;
+                 :birthDate "1946-12-18"^^xsd:date ;
+                 :firstName "Steven" ;
+                 :lastName "Spielberg" .
+
+
+###  http://www.semanticweb.org/andrewkrasuski/ontologies/MovieProject2024.owl/StudioGhibli
+:StudioGhibli rdf:type owl:NamedIndividual ,
+                       :Production_Company ;
+              :owns :MyNeighborTotoro ,
+                    :SpiritedAway ;
+              :produces :MyNeighborTotoro ,
+                        :SpiritedAway .
+
+
+###  http://www.semanticweb.org/andrewkrasuski/ontologies/MovieProject2024.owl/SuperMarioBrosMovie
+:SuperMarioBrosMovie rdf:type owl:NamedIndividual ,
+                              :Movie ;
+                     :hasCertification :G_Certified ;
+                     :hasGenre :Adventure ,
+                               :Animation ,
+                               :Comedy ;
+                     :producedBy :Nintendo ;
+                     :duration 92 ;
+                     :movieTitle "Super Mario Bros. Movie" ;
+                     :releaseDate "2023-04-05T00:00:00Z"^^xsd:dateTime .
+
+
+###  http://www.semanticweb.org/andrewkrasuski/ontologies/MovieProject2024.owl/SylvesterStallone
+:SylvesterStallone rdf:type owl:NamedIndividual ,
+                            :Actor ;
+                   :hasGender :Male ;
+                   :playsIn :Rocky ;
+                   :birthDate "1946-07-06"^^xsd:date ;
+                   :firstName "Sylvester" ;
+                   :lastName "Stallone" .
+
+
+###  http://www.semanticweb.org/andrewkrasuski/ontologies/MovieProject2024.owl/TheLionKing
+:TheLionKing rdf:type owl:NamedIndividual ,
+                      :Movie ;
+             :hasAward :Best_Sound ;
+             :hasCertification :G_Certified ;
+             :hasGenre :Animation ,
+                       :Drama ;
+             :producedBy :WaltDisneyPictures ;
+             :duration 88 ;
+             :movieTitle "The Lion King" ;
+             :releaseDate "1994-06-15T00:00:00Z"^^xsd:dateTime .
+
+
+###  http://www.semanticweb.org/andrewkrasuski/ontologies/MovieProject2024.owl/TheTerminator
+:TheTerminator rdf:type owl:NamedIndividual ,
+                        :Movie ;
+               :hasAward :Best_Picture ;
+               :hasCertification :M ;
+               :hasGenre :Action ,
+                         :Science_Fiction ;
+               :producedBy :OrionPictures ;
+               :duration 107 ;
+               :movieTitle "The Terminator" ;
+               :releaseDate "1984-10-26T00:00:00Z"^^xsd:dateTime .
+
+
+###  http://www.semanticweb.org/andrewkrasuski/ontologies/MovieProject2024.owl/Thriller
+:Thriller rdf:type owl:NamedIndividual ,
+                   :Genre .
+
+
+###  http://www.semanticweb.org/andrewkrasuski/ontologies/MovieProject2024.owl/TomHanks
+:TomHanks rdf:type owl:NamedIndividual ,
+                   :Actor ;
+          :hasGender :Male ;
+          :playsIn :ToyStory ;
+          :birthDate "1956-07-09"^^xsd:date ;
+          :firstName "Tom" ;
+          :lastName "Hanks" .
+
+
+###  http://www.semanticweb.org/andrewkrasuski/ontologies/MovieProject2024.owl/ToshioSuzuki
+:ToshioSuzuki rdf:type owl:NamedIndividual ,
+                       :Producer ;
+              :produces :MyNeighborTotoro ,
+                        :SpiritedAway ;
+              :firstName "Toshio" ;
+              :lastName "Suzuki" .
+
+
+###  http://www.semanticweb.org/andrewkrasuski/ontologies/MovieProject2024.owl/ToyStory
+:ToyStory rdf:type owl:NamedIndividual ,
+                   :Movie ;
+          :hasCertification :G_Certified ;
+          :hasGenre :Animation ,
+                    :Comedy ;
+          :producedBy :WaltDisneyPictures ;
+          :duration 81 ;
+          :movieTitle "Toy Story" ;
+          :releaseDate "1995-11-22T00:00:00Z"^^xsd:dateTime .
+
+
+###  http://www.semanticweb.org/andrewkrasuski/ontologies/MovieProject2024.owl/UnitedArtists
+:UnitedArtists rdf:type owl:NamedIndividual ,
+                        :Production_Company ;
+               :owns :Rocky ;
+               :produces :Rocky .
+
+
+###  http://www.semanticweb.org/andrewkrasuski/ontologies/MovieProject2024.owl/VeronicaTaylor
+:VeronicaTaylor rdf:type owl:NamedIndividual ,
+                         :Actress ;
+                :hasGender :Female ;
+                :playsIn :PokemonTheFirstMovie ;
+                :birthDate "1965-12-04"^^xsd:date ;
+                :firstName "Veronica" ;
+                :lastName "Taylor" .
+
+
+###  http://www.semanticweb.org/andrewkrasuski/ontologies/MovieProject2024.owl/VickyJenson
+:VickyJenson rdf:type owl:NamedIndividual ,
+                      :Director ;
+             :directed :Shrek ;
+             :firstName "Vicky" ;
+             :lastName "Jenson" .
+
+
+###  http://www.semanticweb.org/andrewkrasuski/ontologies/MovieProject2024.owl/WaltDisneyPictures
+:WaltDisneyPictures rdf:type owl:NamedIndividual ,
+                             :Production_Company ;
+                    :owns :TheLionKing ;
+                    :produces :TheLionKing .
+
+
+###  http://www.semanticweb.org/andrewkrasuski/ontologies/MovieProject2024.owl/War
+:War rdf:type owl:NamedIndividual ,
+              :Genre .
+
+
+###  http://www.semanticweb.org/andrewkrasuski/ontologies/MovieProject2024.owl/WarnerBros
+:WarnerBros rdf:type owl:NamedIndividual ,
+                     :Production_Company ;
+            :owns :PokemonTheFirstMovie ;
+            :produces :PokemonTheFirstMovie .
+
+
+###  http://www.semanticweb.org/andrewkrasuski/ontologies/MovieProject2024.owl/Western
+:Western rdf:type owl:NamedIndividual ,
+                  :Genre .
+
+
+###  http://www.semanticweb.org/andrewkrasuski/ontologies/MovieProject2024.owl/ZachBraff
+:ZachBraff rdf:type owl:NamedIndividual ,
+                    :Actor ;
+           :hasGender :Male ;
+           :playsIn :ChickenLittle ;
+           :birthDate "1975-04-06"^^xsd:date ;
+           :firstName "Zach" ;
+           :lastName "Braff" .
+
+
+###  http://www.semanticweb.org/andrewkrasuski/ontologies/MovieProject2024.owl/20thCenturyFox
+<http://www.semanticweb.org/andrewkrasuski/ontologies/MovieProject2024.owl/20thCenturyFox> rdf:type owl:NamedIndividual ,
+                                                                                                    :Production_Company ;
+                                                                                           :owns :EmpireStrikesBack ;
+                                                                                           :produces :EmpireStrikesBack .
+
+
+###  Generated by the OWL API (version 4.5.26.2023-07-17T20:34:13Z) https://github.com/owlcs/owlapi
