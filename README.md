@@ -1,7 +1,7 @@
 # Movie Ontology Project
 
 ## Overview
-The Movie Ontology Project is designed to create a structured, semantic representation of movie-related data using Java. This repository serves as a framework for organizing and accessing movie information through an ontology.
+The Movie Ontology Project is designed to create a structured, semantic representation of movie-related data using Java. This repository serves as a framework for organizing and accessing information about a subset of movies through an ontology.
 
 ## Features
 - **Java-based Implementation**: Core functionality is developed in Java, ensuring cross-platform compatibility.
